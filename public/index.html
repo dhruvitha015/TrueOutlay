@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrueOutlay</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="splashScreen" class="splash-screen" role="status" aria-label="TrueOutlay">
+    <div class="splash-brand">
+      <span class="splash-cart" aria-hidden="true">🛒</span>
+      <div class="splash-wordmark" role="img" aria-label="TrueOutlay"></div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">🛒 True<span>Outlay</span></div>
+    <button id="themeToggleBtn" class="btn outline-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+    
+    <!-- Hero Header -->
+    <section class="hero-section">
+      <h1>Find the Best  Deals & Smart EMI Plans</h1>
+      <p>Compare real-time prices across Amazon , Flipkart, Croma, and Reliance Digital.</p>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="filter-card">
+      <div class="search-row">
+        <input type="text" id="searchBox" placeholder="Search products (e.g. OnePlus, MacBook, Bravia)..." oninput="applyFilters()" />
+      </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <label for="categorySelect">Category</label>
+          <select id="categorySelect" onchange="applyFilters()">
+            <option value="All">All Categories</option>
+            <option value="Smartphones">Smartphones</option>
+            <option value="Laptops">Laptops</option>
+            <option value="Audio">Audio</option>
+            <option value="Appliances">Appliances</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="merchantSelect">Merchant</label>
+          <select id="merchantSelect" onchange="applyFilters()">
+            <option value="All">All Merchants</option>
+            <option value="Amazon India">Amazon</option>
+            <option value="Flipkart">Flipkart</option>
+            <option value="Croma">Croma</option>
+            <option value="Reliance Digital">Reliance Digital</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="minDiscountInput">Min Discount (%)</label>
+          <input type="number" id="minDiscountInput" placeholder="0" min="0" max="100" oninput="applyFilters()" />
+        </div>
+
+        <div class="filter-group">
+          <label for="maxPriceInput">Max Price (₹)</label>
+          <input type="number" id="maxPriceInput" placeholder="No limit" min="0" oninput="applyFilters()" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendation Section (Machine Learning Engine) -->
+    <section id="recommendedSection" class="section-container hidden">
+      <div class="section-header">
+        <h2>✨ Recommended For You</h2>
+        <span class="sub-tag">Based on your activity</span>
+      </div>
+      <div id="recommendedGrid" class="cards-grid"></div>
+    </section>
+
+    <!-- Deal Results Section -->
+    <section class="section-container">
+      <div class="section-header">
+        <h2>🔥 Live Indian Price Comparisons</h2>
+      </div>
+      <div id="dealsGrid" class="cards-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- EMI Modal -->
+  <div id="emiModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle">Product EMI Calculator</h3>
+          <p id="modalSub">Compare tenures, No-Cost EMI options, processing fees & total outlay</p>
+        </div>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="calc-input-group">
+          <label for="downPaymentInput">Custom Down Payment (₹):</label>
+          <input type="number" id="downPaymentInput" value="0" min="0" oninput="updateEmiTable()" />
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Tenure</th>
+                <th>Interest (APR)</th>
+                <th>Monthly Installment</th>
+                <th>Proc. Fee</th>
+                <th>Total Effective Outlay</th>
+              </tr>
+            </thead>
+            <tbody id="emiTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

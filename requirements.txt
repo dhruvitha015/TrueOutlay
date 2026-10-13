@@ -1,0 +1,4 @@
+# SmartBuy / TrueOutlay - requirements
+# This project has ZERO third-party packages (no pip / no npm install needed).
+# Only the Node.js runtime is required:
+node>=18
